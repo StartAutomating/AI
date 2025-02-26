@@ -6,7 +6,7 @@ Write-FormatView -TypeName Ollama.Model -Property Model, Modified_At, Size -Virt
             '{0:N2} mb' -f ($_.Size / 1MB)
         } elseif ($_.Size -gt 1KB) {
             '{0:N2} kb' -f ($_.Size / 1KB)
-        } else {
+        } elseif ($_.Size) {
             '{0:N2} b' -f $_.Size
         }
     }
