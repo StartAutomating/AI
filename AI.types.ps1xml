@@ -1,6 +1,19 @@
 <!-- Generated with EZOut 2.0.6: Install-Module EZOut or https://github.com/StartAutomating/EZOut -->
 <Types>
   <Type>
+    <Name>AI</Name>
+    <Members>
+      <ScriptMethod>
+        <Name>Chat</Name>
+        <Script>
+                        param()
+Get-Ollama -Chat $args
+
+                    </Script>
+      </ScriptMethod>
+    </Members>
+  </Type>
+  <Type>
     <Name>Ollama.Job</Name>
     <Members>
     </Members>
