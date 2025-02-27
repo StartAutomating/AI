@@ -11,6 +11,14 @@ Get-Ollama -Chat $args
 
                     </Script>
       </ScriptMethod>
+      <ScriptMethod>
+        <Name>Prompt</Name>
+        <Script>
+                        param()
+Get-Ollama -Prompt "$($args -join ' ')"
+
+                    </Script>
+      </ScriptMethod>
     </Members>
   </Type>
   <Type>
