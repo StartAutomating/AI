@@ -248,7 +248,7 @@ function Get-Ollama {
                                 0,
                                 $inJob.IO.StringBuilder.Length - $progressCharWidth
                             )
-                        )
+                        ) -replace '[\s\n\r]', ' '
                     )"
                     Write-Progress @progressSplat
                     $lastLength = $inJob.IO.StringBuilder.Length
