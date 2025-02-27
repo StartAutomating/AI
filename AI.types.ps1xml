@@ -19,6 +19,22 @@ Get-Ollama -Prompt "$($args -join ' ')"
 
                     </Script>
       </ScriptMethod>
+      <ScriptProperty>
+        <Name>DefaultModel</Name>
+        <GetScriptBlock>
+                        if ($this.'.DefaultModel') {
+    return $this.'.DefaultModel'
+}
+else {
+    return 'llama3.2'
+}
+                    </GetScriptBlock>
+        <SetScriptBlock>
+                        param([string]$DefaultModel)
+$this | 
+    Add-Member -Force -NoteProperty -Name '.DefaultModel' -Value "$DefaultModel"
+                    </SetScriptBlock>
+      </ScriptProperty>
     </Members>
   </Type>
   <Type>
