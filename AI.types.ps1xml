@@ -40,6 +40,16 @@ $this |
   <Type>
     <Name>Ollama.Job</Name>
     <Members>
+      <ScriptMethod>
+        <Name>ToString</Name>
+        <Script>
+                        if ($this.IO.StringBuilder){
+    "$($this.IO.StringBuilder)"
+} else {
+    return ($this | Receive-Job -Keep | Out-String)
+}
+                    </Script>
+      </ScriptMethod>
     </Members>
   </Type>
   <Type>
