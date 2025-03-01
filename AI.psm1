@@ -29,6 +29,19 @@ if ($home) {
 $script:this = $myModule
 
 #region Custom
+$ollamaApplication = $ExecutionContext.SessionState.InvokeCommand.GetCommand('ollama','Application')
+if (-not $ollamaApplication) {
+    Write-Warning "Ollama is not installed or in the path. Please install it from https://ollama.com/download"
+} else {
+    $isOllamaRunning = Get-Process -Name ollama -ErrorAction Ignore
+    if (-not $isOllamaRunning) {
+        $ollamaServer = Start-ThreadJob -Name "ollama serve" -ScriptBlock { ollama serve }        
+    }
+    $script:OllamaModels = Get-Ollama -ListModel
+    foreach ($modelInfo in $script:OllamaModels) {
+        $ExecutionContext.SessionState.PSVariable.Set("alias:$($modelInfo.Name -replace '\:latest$')", 'Get-AI')        
+    }
+}
 #endregion Custom
 
 Export-ModuleMember -Alias * -Function * -Variable $myModule.Name
