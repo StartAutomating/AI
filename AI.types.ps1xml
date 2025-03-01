@@ -1,0 +1,60 @@
+<!-- Generated with EZOut 2.0.6: Install-Module EZOut or https://github.com/StartAutomating/EZOut -->
+<Types>
+  <Type>
+    <Name>AI</Name>
+    <Members>
+      <ScriptMethod>
+        <Name>Chat</Name>
+        <Script>
+                        param()
+Get-Ollama -Chat $args
+
+                    </Script>
+      </ScriptMethod>
+      <ScriptMethod>
+        <Name>Prompt</Name>
+        <Script>
+                        param()
+Get-Ollama -Prompt "$($args -join ' ')"
+
+                    </Script>
+      </ScriptMethod>
+      <ScriptProperty>
+        <Name>DefaultModel</Name>
+        <GetScriptBlock>
+                        if ($this.'.DefaultModel') {
+    return $this.'.DefaultModel'
+}
+else {
+    return 'llama3.2'
+}
+                    </GetScriptBlock>
+        <SetScriptBlock>
+                        param([string]$DefaultModel)
+$this | 
+    Add-Member -Force -NoteProperty -Name '.DefaultModel' -Value "$DefaultModel"
+                    </SetScriptBlock>
+      </ScriptProperty>
+    </Members>
+  </Type>
+  <Type>
+    <Name>Ollama.Job</Name>
+    <Members>
+      <ScriptMethod>
+        <Name>ToString</Name>
+        <Script>
+                        if ($this.IO.StringBuilder){
+    "$($this.IO.StringBuilder)"
+} else {
+    return ($this | Receive-Job -Keep | Out-String)
+}
+                    </Script>
+      </ScriptMethod>
+    </Members>
+  </Type>
+  <Type>
+    <Name>Ollama.Model</Name>
+    <Members>
+    </Members>
+  </Type>
+</Types>
